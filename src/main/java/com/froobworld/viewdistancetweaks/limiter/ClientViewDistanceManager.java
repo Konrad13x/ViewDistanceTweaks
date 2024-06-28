@@ -61,8 +61,8 @@ public class ClientViewDistanceManager implements Listener {
 
     private void sendViewDistance(Player player, int viewDistance) {
         Object packet = onClass("net.minecraft.network.protocol.game.PacketPlayOutViewDistance").create(viewDistance).get();
-        if (NmsUtils.getMinorVersion() == 20) {
-            if (NmsUtils.getRevisionNumber() > 1) {
+        if (NmsUtils.getMinorVersion() == 21) {
+            if (NmsUtils.getRevisionNumber() > 21) {
                 on(player).call("getHandle")
                         .field("c")
                         .call("b", packet);
@@ -108,8 +108,8 @@ public class ClientViewDistanceManager implements Listener {
         }
 
         public void inject() {
-            if (NmsUtils.getMinorVersion() == 20) {
-                if (NmsUtils.getRevisionNumber() > 1) {
+            if (NmsUtils.getMinorVersion() == 21) {
+                if (NmsUtils.getRevisionNumber() > 21) {
                     on(player).call("getHandle")
                             .field("c")
                             .field("c")
@@ -125,7 +125,7 @@ public class ClientViewDistanceManager implements Listener {
                             .call("addLast", "vdt_packet_handler", this);
                 }
             } else if (NmsUtils.getMinorVersion() == 19) {
-                if (NmsUtils.getRevisionNumber() > 2) {
+                if (NmsUtils.getRevisionNumber() > 21) {
                     on(player).call("getHandle")
                             .field("b")
                             .field("h")
@@ -141,7 +141,7 @@ public class ClientViewDistanceManager implements Listener {
                             .call("addLast", "vdt_packet_handler", this);
                 }
             } else if (NmsUtils.getMinorVersion() == 18) {
-                if (NmsUtils.getRevisionNumber() == 2) {
+                if (NmsUtils.getRevisionNumber() == 21) {
                     on(player).call("getHandle")
                             .field("b") // PlayerConnection
                             .field("a") // NetWorkManager
@@ -149,7 +149,7 @@ public class ClientViewDistanceManager implements Listener {
                             .call("pipeline")
                             .call("addLast", "vdt_packet_handler", this);
 
-                } else if (NmsUtils.getRevisionNumber() == 1) {
+                } else if (NmsUtils.getRevisionNumber() == 21) {
                     on(player).call("getHandle")
                             .field("b") // PlayerConnection
                             .field("a") // NetWorkManager
@@ -162,8 +162,8 @@ public class ClientViewDistanceManager implements Listener {
 
         public void remove() {
             try {
-                if (NmsUtils.getMinorVersion() == 20) {
-                    if (NmsUtils.getRevisionNumber() > 1) {
+                if (NmsUtils.getMinorVersion() == 21) {
+                    if (NmsUtils.getRevisionNumber() > 21) {
                         on(player).call("getHandle")
                                 .field("c")
                                 .field("c")
@@ -186,15 +186,15 @@ public class ClientViewDistanceManager implements Listener {
                             .call("pipeline")
                             .call("remove", "vdt_packet_handler");
                 } else if (NmsUtils.getMinorVersion() == 18) {
-                    if (NmsUtils.getRevisionNumber() == 2) {
-                        if (NmsUtils.getRevisionNumber() == 2) {
+                    if (NmsUtils.getRevisionNumber() == 21) {
+                        if (NmsUtils.getRevisionNumber() == 21) {
                             on(player).call("getHandle")
                                     .field("b") // PlayerConnection
                                     .field("a") // NetWorkManager
                                     .field("m") // Channel
                                     .call("pipeline")
                                     .call("remove", "vdt_packet_handler");
-                        } else if (NmsUtils.getRevisionNumber() == 1) {
+                        } else if (NmsUtils.getRevisionNumber() == 21) {
                             on(player).call("getHandle")
                                     .field("b") // PlayerConnection
                                     .field("a") // NetWorkManager
